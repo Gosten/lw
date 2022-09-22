@@ -1,0 +1,65 @@
+/* 
+    To add new color create new color variable in :root,
+    then create new css class named "grip-color-n" 
+    and set its background attribute to your new color variable
+*/
+
+:root {
+	--color-1: hsl(101, 48%, 63%);
+	--color-2: hsl(45, 100%, 70%);
+	--color-3: hsl(10, 69%, 47%);
+	--color-4: hsl(329, 47%, 62%);
+	--color-5: hsl(31, 89%, 69%);
+	--color-6: hsl(0, 0%, 80%);
+
+	--selection-1: rgb(0, 255, 0);
+	--selection-2: rgb(255, 0, 0);
+	--selection-3: rgb(0, 0, 255);
+	--selection-4: rgb(255, 174, 0);
+}
+
+.grip-color-1 {
+	background: var(--color-1);
+}
+.grip-color-2 {
+	background: var(--color-2);
+}
+.grip-color-3 {
+	background: var(--color-3);
+}
+.grip-color-4 {
+	background: var(--color-4);
+}
+.grip-color-5 {
+	background: var(--color-5);
+}
+.grip-color-6 {
+	background: var(--color-6);
+}
+
+.grip-selection-0{
+	stroke: var(--selection-4) !important; /* tu musi pójść kolor ostatni*/
+	opacity: 0;
+}
+.grip-selection-0-limit{
+	stroke: var(--selection-3) !important; /* tu musi pójść kolor PRZEDostatni*/
+	opacity: 0;
+}
+
+.grip-selection-1{
+	stroke: var(--selection-1) !important;
+}
+
+.grip-selection-2{
+	stroke: var(--selection-2) !important;
+}
+
+.grip-selection-3{
+	stroke: var(--selection-3) !important;
+}
+
+.grip-selection-4{
+	stroke: var(--selection-4) !important;
+}
+
+
