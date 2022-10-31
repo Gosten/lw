@@ -46,7 +46,7 @@ const store = new Vuex.Store({
       selectedGrade: 0,
       newProblem: {}
     },
-    problemList: [],
+    problemList,
     filterSlider: {
       value1: 0,
       value2: GRADES.length - 1
