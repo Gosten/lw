@@ -49,7 +49,7 @@ module.exports = {
 };
 </script>
 
-<style scoped type="text/css">
+<style scoped>
 .comment-container {
   width: 100%;
   padding-inline: 1em;

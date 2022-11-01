@@ -109,7 +109,7 @@ module.exports = {
 };
 </script>
 
-<style scoped type="text/css">
+<style scoped>
 .border-red {
   border-color: red;
 }

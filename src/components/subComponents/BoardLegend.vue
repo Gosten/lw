@@ -5,7 +5,7 @@ module.exports = {
 };
 </script>
 
-<style scoped type="text/css">
+<style scoped>
 .legend-container {
   display: flex;
   justify-content: space-around;

@@ -70,7 +70,7 @@ module.exports = {
 };
 </script>
 
-<style scoped type="text/css">
+<style scoped>
 @import url("../css/App.css");
 .component-fade-enter-active,
 .component-fade-leave-active {

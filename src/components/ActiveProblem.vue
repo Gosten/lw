@@ -48,7 +48,7 @@ module.exports = {
 };
 </script>
 
-<style scoped type="text/css">
+<style scoped>
 .container {
   display: flex;
   flex-direction: column;

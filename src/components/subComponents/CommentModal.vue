@@ -15,7 +15,7 @@ module.exports = {
 };
 </script>
 
-<style scoped type="text/css">
+<style scoped>
 .comment-modal {
   display: block;
   text-overflow: ellipsis;

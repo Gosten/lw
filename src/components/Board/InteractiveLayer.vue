@@ -67,11 +67,9 @@ module.exports = {
     setTimeout(() => this.updateSelectors(), 500);
     let el = document.getElementById("pinch-zoom-1");
     this.zoomElement = new PinchZoom(el, {
+      setOffsetsOnce: true,
       draggableUnzoomed: false
     });
-    if (this.isScene(LOAD_PROBLEM)) {
-      this.zoomElement.disable();
-    }
   },
   beforeDestroy() {
     this.zoomElement.destroy();
@@ -83,7 +81,7 @@ module.exports = {
 };
 </script>
 
-<style scoped type="text/css">
+<style scoped>
 @import "../../css/app_config.css";
 
 #interaction-layer path {

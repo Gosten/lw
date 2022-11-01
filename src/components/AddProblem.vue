@@ -198,7 +198,7 @@ module.exports = {
 };
 </script>
 
-<style scoped type="text/css">
+<style scoped>
 @import url("../css/AddProblem.css");
 
 .fade-enter-active,

@@ -64,7 +64,7 @@ module.exports = {
 };
 </script>
 
-<style scoped type="text/css">
+<style scoped>
 .zoom-container {
   justify-content: flex-end;
   align-items: center;
