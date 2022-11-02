@@ -2,8 +2,8 @@
   <div id="active-container" class="container">
     <div class="active-problem-top-container">
       <button class="back-to-load-problem-btn" @click="goToLoadProblem">
-        <i class="mdi mdi-arrow-left"></i>
-        <!-- <p class="back-to-load-problem-btn-text">powrót</p> -->
+        <!-- <i class="mdi mdi-arrow-left"></i> -->
+        <p class="back-to-load-problem-btn-text">powrót</p>
       </button>
     </div>
     <div id="board-style" class="width-100 flex-container-blank">
