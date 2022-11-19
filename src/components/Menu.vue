@@ -37,11 +37,11 @@ module.exports = {
     getHeader() {
       switch (this.menuSelection) {
         case ADD_PROBLEM:
-          return "Dodaj problem";
+          return "Dodaj nowy";
         case LOAD_PROBLEM:
-          return "Wczytaj problem";
+          return "Lista";
         case EDIT_PROBLEM:
-          return "Edytuj problem";
+          return "Edytuj";
         default:
           break;
       }

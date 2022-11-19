@@ -7,14 +7,14 @@
           :class="{ 'selected-option': menuSelection === LOAD_PROBLEM }"
           @click="handleMenuSelection(LOAD_PROBLEM)"
         >
-          <span>Wczytaj</span><span>problem</span>
+          <span>Lista</span>
         </div>
         <div
           class="menu-option"
           :class="{ 'selected-option': menuSelection === ADD_PROBLEM }"
           @click="handleMenuSelection(ADD_PROBLEM)"
         >
-          <span>Dodaj</span><span>problem</span>
+          <span>Dodaj</span><span>nowy</span>
         </div>
         <div
           v-if="activeProblem"
@@ -22,7 +22,7 @@
           :class="{ 'selected-option': menuSelection === ACTIVE_PROBLEM }"
           @click="handleMenuSelection(ACTIVE_PROBLEM)"
         >
-          <span>Aktywny</span><span>problem</span>
+          <span>Aktywny</span>
         </div>
         <!-- <div
           class="menu-option"
