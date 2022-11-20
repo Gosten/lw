@@ -1,52 +1,3 @@
-<template>
-  <div id="add-problem" class="grid-content">
-    <div id="add-problem-top" class="top-conainer">
-      <div id="board-style-AP" class="board-position">
-        <transition name="board-fade">
-          <board board-id="board-AdP"></board>
-        </transition>
-      </div>
-
-      <board-legend></board-legend>
-      <scroll-arrow scroll-container-id="add-problem"></scroll-arrow>
-    </div>
-
-    <div class="flex-container-blank" id="add-bottom">
-      <div class="bottom">
-        <scroll-arrow
-          scroll-container-id="add-problem"
-          :reverse="true"
-        ></scroll-arrow>
-        <div class="input-container">
-          <div class="name-grade-container">
-            <name-input
-              :set-name="setName"
-              :set-author="setAuthor"
-              :error-name="errorFlags.name"
-              :set-error-name="setErrorFlag"
-            ></name-input>
-            <div v-if="ENABLE_GRADES" class="slider-width">
-              <grade-slider></grade-slider>
-            </div>
-          </div>
-          <comment-field :set-comment="setComment"></comment-field>
-        </div>
-        <div class="button-container">
-          <button class="button" @click="addProblem">Dodaj problem</button>
-        </div>
-      </div>
-    </div>
-
-    <transition name="fade">
-      <error-modal v-if="errorState.active"></error-modal>
-    </transition>
-
-    <transition name="fade">
-      <problem-modal v-if="addModal"></problem-modal>
-    </transition>
-  </div>
-</template>
-
 <script>
 module.exports = {
   mounted() {
@@ -70,7 +21,9 @@ module.exports = {
       ENABLE_GRADES,
       ENABLE_AUTHOR,
       ADD_PROBLEM,
-      textInputHandle: undefined
+      textInputHandle: undefined,
+      ProblemTypes,
+      problemType: null
     };
   },
   components: {
@@ -82,7 +35,8 @@ module.exports = {
     "grade-slider": httpVueLoader("components/SingleSlider.vue"),
     "board-legend": httpVueLoader("components/subComponents/BoardLegend.vue"),
     "scroll-arrow": httpVueLoader("components/subComponents/ScrollArrow.vue"),
-    "comment-field": httpVueLoader("components/subComponents/CommentField.vue")
+    "comment-field": httpVueLoader("components/subComponents/CommentField.vue"),
+    "type-switch": httpVueLoader("components/subComponents/MultiSwitch.vue")
   },
   computed: {
     problmState() {
@@ -141,6 +95,7 @@ module.exports = {
         grips: this.problmState,
         author: this.authNameValue,
         comment: this.commentValue || "",
+        isLoop: this.problemType === this.ProblemTypes.Loop,
         timestamp: Date.now()
       };
       if (this.validateProblem(newProblem)) {
@@ -193,6 +148,10 @@ module.exports = {
     handleNameError(errorMessage) {
       this.handleError(errorMessage);
       this.errorFlags.name = true;
+    },
+
+    setType(type) {
+      this.problemType = type;
     }
   }
 };
@@ -223,4 +182,64 @@ module.exports = {
 .opacity {
   opacity: 0;
 }
+
+.type-switch {
+  margin-block: 1em;
+}
 </style>
+
+<template>
+  <div id="add-problem" class="grid-content">
+    <div id="add-problem-top" class="top-conainer">
+      <div id="board-style-AP" class="board-position">
+        <transition name="board-fade">
+          <board board-id="board-AdP"></board>
+        </transition>
+      </div>
+
+      <board-legend></board-legend>
+      <scroll-arrow scroll-container-id="add-problem"></scroll-arrow>
+    </div>
+
+    <div class="flex-container-blank" id="add-bottom">
+      <div class="bottom">
+        <scroll-arrow
+          scroll-container-id="add-problem"
+          :reverse="true"
+        ></scroll-arrow>
+        <div class="input-container">
+          <div class="name-grade-container">
+            <name-input
+              :set-name="setName"
+              :set-author="setAuthor"
+              :error-name="errorFlags.name"
+              :set-error-name="setErrorFlag"
+            ></name-input>
+            <div v-if="ENABLE_GRADES" class="slider-width">
+              <grade-slider></grade-slider>
+            </div>
+          </div>
+          <type-switch
+            class="type-switch"
+            :selection-kinds="[ProblemTypes.Bald, ProblemTypes.Loop]"
+            :default-selection-index="0"
+            :set-value="setType"
+          >
+          </type-switch>
+          <comment-field :set-comment="setComment"></comment-field>
+        </div>
+        <div class="button-container">
+          <button class="button" @click="addProblem">Dodaj problem</button>
+        </div>
+      </div>
+    </div>
+
+    <transition name="fade">
+      <error-modal v-if="errorState.active"></error-modal>
+    </transition>
+
+    <transition name="fade">
+      <problem-modal v-if="addModal"></problem-modal>
+    </transition>
+  </div>
+</template>

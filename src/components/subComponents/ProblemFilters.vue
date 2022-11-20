@@ -20,6 +20,9 @@ module.exports = {
     },
     blurInput(e) {
       if (e.keyCode === 13) this.textInputHandle.blur();
+    },
+    setType(type) {
+      this.handleTypeChange(type);
     }
   },
   data() {
@@ -27,7 +30,9 @@ module.exports = {
       ENABLE_GRADES,
       inputValue: "",
       isCollapsed: true,
-      textInputHandle: undefined
+      textInputHandle: undefined,
+      selectedProblemType: null,
+      ProblemTypes
     };
   },
   updated() {
@@ -42,11 +47,13 @@ module.exports = {
   },
   components: {
     "name-input": httpVueLoader("components/subComponents/NameInputLoad.vue"),
-    "slider-component": httpVueLoader("components/DoubleSlider.vue")
+    "slider-component": httpVueLoader("components/DoubleSlider.vue"),
+    "type-switch": httpVueLoader("components/subComponents/MultiSwitch.vue")
   },
   props: {
     setIsFilterCollapsed: Function,
-    handleFilterInputChange: Function
+    handleFilterInputChange: Function,
+    handleTypeChange: Function
   }
 };
 </script>
@@ -103,7 +110,7 @@ module.exports = {
   background: white;
   padding: 0 1em;
   transition: height 0.15s ease-in-out;
-  height: 13.5em;
+  height: 17.5em;
   position: relative;
 }
 .filter-collapsed {
@@ -134,6 +141,11 @@ module.exports = {
   justify-content: center;
   align-items: center;
 }
+
+.type-switch {
+  margin-block: 1em;
+  width: 100%;
+}
 </style>
 
 <template>
@@ -156,6 +168,14 @@ module.exports = {
         <div :v-if="ENABLE_GRADES" class="slider-width">
           <slider-component></slider-component>
         </div>
+        <type-switch
+          class="type-switch"
+          :selection-kinds="[ProblemTypes.Bald, ProblemTypes.Loop]"
+          :default-selection-index="0"
+          :set-value="setType"
+          enable-select-all
+        >
+        </type-switch>
         <input
           id="add-problem-author-input"
           class="input-name input"
