@@ -17,8 +17,8 @@ module.exports = {
     };
   },
   mounted() {
-    setTimeout(() => (this.fade = false), 2000);
-    setTimeout(() => this.$store.commit("toggleIntro"), 4000);
+    setTimeout(() => (this.fade = false), 3000);
+    setTimeout(() => this.$store.commit("toggleIntro"), 3700);
   }
 };
 </script>
