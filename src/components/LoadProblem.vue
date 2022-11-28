@@ -32,9 +32,7 @@ module.exports = {
       touchstartX: 0,
       isSwipeListenerSet: false,
       selectedProblemIndex: null,
-      isProblemReloading: false,
-      ProblemTypes,
-      problemTypeFilter: [ProblemTypes.Bald, ProblemTypes.Loop]
+      isProblemReloading: false
     };
   },
   methods: {
@@ -122,7 +120,7 @@ module.exports = {
         nextIndex = this.selectedProblemIndex - 1;
       }
       const nextProblem = this.filteredList[nextIndex];
-      if (nextProblem) {
+      if (Boolean(nextProblem)) {
         return nextIndex;
       }
       return null;
@@ -130,7 +128,7 @@ module.exports = {
 
     handleSwipe(dir) {
       const nextIndex = this.getNextIndex(dir);
-      if (nextIndex) {
+      if (nextIndex !== null) {
         const nextProblem = this.filteredList[nextIndex];
         this.selectedProblemIndex = nextIndex;
         this.isProblemReloading = true;
@@ -139,10 +137,6 @@ module.exports = {
         }, 50);
         this.$store.commit("selectProblem", nextProblem);
       }
-    },
-
-    handleTypeChange(types) {
-      this.problemTypeFilter = types;
     }
   },
   beforeUnmount() {
@@ -159,22 +153,13 @@ module.exports = {
     filteredList() {
       if (this.problemList) {
         let newList = [...this.problemList];
-
-        //filter by type
-        newList = newList.filter((problem) => {
-          const problemType = problem.isLoop
-            ? ProblemTypes.Loop
-            : ProblemTypes.Bald;
-          // all selected
-          return this.problemTypeFilter.includes(problemType);
-        });
-
         //sort by timestamp
         newList = newList.sort((a, b) => {
           if (b.timestamp && a.timestamp) return b.timestamp - a.timestamp;
           if (b.timestamp) return 1;
           return -1;
         });
+        console.log({ filterVal: this.textFilter });
         if (this.textFilter) {
           //filter by name
           //filter by author
@@ -188,6 +173,7 @@ module.exports = {
           );
         }
 
+        console.log({ grade: this.filterGrades });
         //filter by grade
         if (this.ENABLE_GRADES) {
           const fromGrade = mapGrade(this.filterGrades.value1);
@@ -338,10 +324,6 @@ module.exports = {
 .problem-swipe-arrow-disabled {
   opacity: 0 !important;
 }
-
-.loop-icon {
-  margin-left: 5px;
-}
 </style>
 
 <template>
@@ -383,10 +365,7 @@ module.exports = {
         }"
         @click="() => handleProblemSelect(problem, index)"
       >
-        <span
-          >{{ parseName(problem) }}
-          <i v-if="problem.isLoop" class="loop-icon mdi mdi-sync"></i
-        ></span>
+        <span>{{ parseName(problem) }}</span>
         <span v-if="ENABLE_GRADES">{{ problem.grade }}</span>
       </li>
     </ul>
@@ -412,7 +391,6 @@ module.exports = {
         v-if="!listCollapsed"
         :handle-filter-input-change="handleFilterInputChange"
         :set-is-filter-collapsed="setIsFilterCollapsed"
-        :handle-type-change="handleTypeChange"
       ></filters>
     </transition>
 
@@ -426,7 +404,8 @@ module.exports = {
                   src="images/arrow_slim_horizontal.svg"
                   alt=""
                   :class="{
-                    'problem-swipe-arrow-disabled': !getNextIndex('left')
+                    'problem-swipe-arrow-disabled':
+                      getNextIndex('left') === null
                   }"
                   @click="() => handleSwipe('left')"
                 />
@@ -444,7 +423,8 @@ module.exports = {
                   src="images/arrow_slim_horizontal.svg"
                   alt=""
                   :class="{
-                    'problem-swipe-arrow-disabled': !getNextIndex('right')
+                    'problem-swipe-arrow-disabled':
+                      getNextIndex('right') === null
                   }"
                   @click="() => handleSwipe('right')"
                 />
