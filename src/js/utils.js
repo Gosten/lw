@@ -41,7 +41,7 @@ function limitNameLength(name, length = 15) {
 
 function parseName(problem) {
   //connect problem name with author
-  const shortName = limitNameLength(problem.name, 10);
+  const shortName = limitNameLength(problem.name, 16);
   if (problem.author && ENABLE_AUTHOR)
     return `${shortName} (${problem.author})`;
   return limitNameLength(problem.name, 15);
