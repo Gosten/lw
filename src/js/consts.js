@@ -9,6 +9,6 @@ const TOPIC = Object.freeze({
   SAVE_STATE: "saveState"
 });
 const ProblemTypes = Object.freeze({
-  Bald: "Bald",
-  Loop: "Obwód"
+  BALD: "Bald",
+  LOOP: "Obwód"
 });

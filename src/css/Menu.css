@@ -24,7 +24,7 @@
 	height: 60px;
 	width: 100%;
 	top: 0;
-	background: hsl(206, 18%, 13%);
+	background: black;
 	color: white;
 	transition: 0.4s height;
 	z-index: 100;
@@ -91,7 +91,7 @@
 	position: absolute;
 	left: 0;
 	display: flex;
-	font-size: 1em;
+	font-size: 1.2em;
 	width: calc(100vw - 50px);
 	align-items: center;
 	justify-content: space-around;

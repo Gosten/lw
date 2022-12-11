@@ -12,7 +12,6 @@ module.exports = {
         this.isCollapsed = false;
         this.setIsFilterCollapsed(false);
       }
-      // console.log("show");
     },
     collapseFilters() {
       this.isCollapsed = true;
@@ -120,20 +119,6 @@ module.exports = {
 .filter-collapsed h3 {
   margin: 0.3em;
 }
-
-.close-button {
-  width: 24px;
-  height: 24px;
-  font-size: 24px;
-  padding: 0;
-  margin: 0;
-  background: transparent;
-  color: black;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-}
-
 .filter-header-container {
   width: 100%;
   height: 100%;
@@ -170,7 +155,7 @@ module.exports = {
         </div>
         <type-switch
           class="type-switch"
-          :selection-kinds="[ProblemTypes.Bald, ProblemTypes.Loop]"
+          :selection-kinds="[ProblemTypes.BALD, ProblemTypes.LOOP]"
           :default-selection-index="0"
           :set-value="setType"
           enable-select-all

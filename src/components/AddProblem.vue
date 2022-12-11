@@ -23,7 +23,9 @@ module.exports = {
       ADD_PROBLEM,
       textInputHandle: undefined,
       ProblemTypes,
-      problemType: null
+      problemType: null,
+      isLoopModalOpen: false,
+      loopOrder: null
     };
   },
   components: {
@@ -36,7 +38,9 @@ module.exports = {
     "board-legend": httpVueLoader("components/subComponents/BoardLegend.vue"),
     "scroll-arrow": httpVueLoader("components/subComponents/ScrollArrow.vue"),
     "comment-field": httpVueLoader("components/subComponents/CommentField.vue"),
-    "type-switch": httpVueLoader("components/subComponents/MultiSwitch.vue")
+    "type-switch": httpVueLoader("components/subComponents/MultiSwitch.vue"),
+    "loop-modal": httpVueLoader("components/subComponents/LoopModal.vue"),
+    "custom-button": httpVueLoader("components/subComponents/CustomButton.vue")
   },
   computed: {
     problmState() {
@@ -65,6 +69,22 @@ module.exports = {
     },
     zoomScale() {
       return this.$store.getters.getZoomScale(ADD_PROBLEM);
+    },
+    isAnyGripSelected() {
+      const problemStateValues = Object.values(this.problmState) || [];
+      return Boolean(
+        problemStateValues.length &&
+          problemStateValues.reduce((acc, curr) => acc || curr)
+      );
+    },
+    gripNumberingButtonIcon() {
+      const selecterGripsAmount = Object.values(this.problmState).filter(
+        Boolean
+      ).length;
+      if (!this.isLoopType || selecterGripsAmount === 0) return "";
+      return !this.loopOrder || selecterGripsAmount > this.loopOrder.length
+        ? "mdi-alert-circle-outline color-warning"
+        : "mdi-checkbox-marked-outline color-success";
     }
   },
   methods: {
@@ -95,7 +115,8 @@ module.exports = {
         grips: this.problmState,
         author: this.authNameValue,
         comment: this.commentValue || "",
-        isLoop: this.problemType === this.ProblemTypes.Loop,
+        isLoop: this.isLoopType,
+        loopOrder: this.loopOrder,
         timestamp: Date.now()
       };
       if (this.validateProblem(newProblem)) {
@@ -123,6 +144,13 @@ module.exports = {
       ).length;
       if (selecterGripsAmount === 0)
         return this.handleError("Nie wybrano żadnego chwytu");
+
+      if (
+        this.isLoopType &&
+        (!this.loopOrder || selecterGripsAmount > this.loopOrder.length)
+      ) {
+        return this.handleError("Dodaj numerację chwytów");
+      }
 
       //validate name uniqueness
       return this.checkNameUniqueness(name);
@@ -152,8 +180,20 @@ module.exports = {
 
     setType(type) {
       this.problemType = type;
+    },
+
+    toggleLoopModal() {
+      this.isLoopModalOpen = !this.isLoopModalOpen;
+    },
+
+    setLoopState(newOrder) {
+      this.loopOrder = newOrder;
     }
-  }
+  },
+  props: {
+    isLoopType: Boolean
+  },
+  updated() {}
 };
 </script>
 
@@ -193,7 +233,7 @@ module.exports = {
     <div id="add-problem-top" class="top-conainer">
       <div id="board-style-AP" class="board-position">
         <transition name="board-fade">
-          <board board-id="board-AdP"></board>
+          <board board-id="board-AdP" v-if="!isLoopModalOpen"></board>
         </transition>
       </div>
 
@@ -219,13 +259,15 @@ module.exports = {
               <grade-slider></grade-slider>
             </div>
           </div>
-          <type-switch
-            class="type-switch"
-            :selection-kinds="[ProblemTypes.Bald, ProblemTypes.Loop]"
-            :default-selection-index="0"
-            :set-value="setType"
-          >
-          </type-switch>
+          <div class="button-container">
+            <custom-button
+              v-if="isLoopType"
+              text="Numeruj chwyty"
+              :handle-click="toggleLoopModal"
+              :disabled="!isAnyGripSelected"
+              :icon-class-name="gripNumberingButtonIcon"
+            ></custom-button>
+          </div>
           <comment-field :set-comment="setComment"></comment-field>
         </div>
         <div class="button-container">
@@ -240,6 +282,15 @@ module.exports = {
 
     <transition name="fade">
       <problem-modal v-if="addModal"></problem-modal>
+    </transition>
+
+    <transition name="fade">
+      <loop-modal
+        v-if="isLoopModalOpen"
+        :close="toggleLoopModal"
+        :initial-order="loopOrder"
+        :set-loop-state="setLoopState"
+      ></loop-modal>
     </transition>
   </div>
 </template>
