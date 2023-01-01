@@ -25,7 +25,6 @@ const store = new Vuex.Store({
       // activeScene: "",
       menuActive: false,
       activeScene: "LOAD_PROBLEM",
-      // activeScene: "ADD_PROBLEM",
       sceneLoaded: true,
       activeProblem: undefined
     },
@@ -47,14 +46,13 @@ const store = new Vuex.Store({
       selectedGrade: 0,
       newProblem: {}
     },
-    // problemList: [],
     problemList,
     filterSlider: {
       value1: 0,
       value2: GRADES.length - 1
     },
-    intro: INTRO,
-    // intro: false,
+    // intro: INTRO,
+    intro: true,
     textInputFocus: false,
     zoomMap: {
       [ADD_PROBLEM]: {

@@ -12,6 +12,7 @@ module.exports = {
         this.isCollapsed = false;
         this.setIsFilterCollapsed(false);
       }
+      // console.log("show");
     },
     collapseFilters() {
       this.isCollapsed = true;
@@ -19,9 +20,6 @@ module.exports = {
     },
     blurInput(e) {
       if (e.keyCode === 13) this.textInputHandle.blur();
-    },
-    setType(type) {
-      this.handleTypeChange(type);
     }
   },
   data() {
@@ -29,9 +27,7 @@ module.exports = {
       ENABLE_GRADES,
       inputValue: "",
       isCollapsed: true,
-      textInputHandle: undefined,
-      selectedProblemType: null,
-      ProblemTypes
+      textInputHandle: undefined
     };
   },
   updated() {
@@ -46,13 +42,11 @@ module.exports = {
   },
   components: {
     "name-input": httpVueLoader("components/subComponents/NameInputLoad.vue"),
-    "slider-component": httpVueLoader("components/DoubleSlider.vue"),
-    "type-switch": httpVueLoader("components/subComponents/MultiSwitch.vue")
+    "slider-component": httpVueLoader("components/DoubleSlider.vue")
   },
   props: {
     setIsFilterCollapsed: Function,
-    handleFilterInputChange: Function,
-    handleTypeChange: Function
+    handleFilterInputChange: Function
   }
 };
 </script>
@@ -109,7 +103,7 @@ module.exports = {
   background: white;
   padding: 0 1em;
   transition: height 0.15s ease-in-out;
-  height: 17.5em;
+  height: 13.5em;
   position: relative;
 }
 .filter-collapsed {
@@ -119,17 +113,26 @@ module.exports = {
 .filter-collapsed h3 {
   margin: 0.3em;
 }
+
+.close-button {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: black;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
 .filter-header-container {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.type-switch {
-  margin-block: 1em;
-  width: 100%;
 }
 </style>
 
@@ -153,14 +156,6 @@ module.exports = {
         <div :v-if="ENABLE_GRADES" class="slider-width">
           <slider-component></slider-component>
         </div>
-        <type-switch
-          class="type-switch"
-          :selection-kinds="[ProblemTypes.BALD, ProblemTypes.LOOP]"
-          :default-selection-index="0"
-          :set-value="setType"
-          enable-select-all
-        >
-        </type-switch>
         <input
           id="add-problem-author-input"
           class="input-name input"

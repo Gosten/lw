@@ -7,14 +7,9 @@ module.exports = {
     editedProblem() {
       return this.$store.getters.getEditedProblem;
     },
-    isLoopBoard() {
-      return this.altPinchId === "loop-pinch";
-    },
     interactionCondition() {
       return (
-        this.activeScene === ADD_PROBLEM ||
-        this.activeScene === EDIT_PROBLEM ||
-        this.isLoopBoard()
+        this.activeScene === ADD_PROBLEM || this.activeScene === EDIT_PROBLEM
       );
     },
     activeProblem() {
@@ -32,16 +27,7 @@ module.exports = {
       const handle = document.getElementById(id);
       if (handle) {
         if (isSelected) {
-          if (this.isLoopBoard) {
-            const isOrdered = this.loopState.order.includes(id);
-            const isSelected = this.loopState.selectedGrip === id;
-            let classList = "stroke grip-selection-loop-unordered";
-            if (isOrdered) classList = `stroke grip-selection-loop-ordered`;
-            if (isSelected) classList = `stroke grip-selection-loop-selected`;
-            handle.classList = classList;
-          } else {
-            handle.classList = `stroke grip-selection-${isSelected}`;
-          }
+          handle.classList = `stroke grip-selection-${isSelected}`;
         } else handle.classList = "";
       }
     },
@@ -79,7 +65,7 @@ module.exports = {
   mounted() {
     this.updateSelectors();
     setTimeout(() => this.updateSelectors(), 500);
-    let el = document.getElementById(this.altPinchId || "pinch-zoom-1");
+    let el = document.getElementById("pinch-zoom-1");
     this.zoomElement = new PinchZoom(el, {
       draggableUnzoomed: false
     });
@@ -90,18 +76,9 @@ module.exports = {
   beforeDestroy() {
     this.zoomElement.destroy();
   },
+  updated() {},
   props: {
-    handleClick: Function,
-    altPinchId: String,
-    loopState: Object
-  },
-  watch: {
-    loopState: {
-      handler: function (newVal, oldVal) {
-        this.updateSelectors();
-      },
-      deep: true
-    }
+    handleClick: Function
   }
 };
 </script>
@@ -130,7 +107,7 @@ module.exports = {
     regex id="(_\d+[_\d+]*)"
     replace id="$1" @click="_handleClick('$1')"
    -->
-  <div :id="altPinchId || 'pinch-zoom-1'" class="background-image-container">
+  <div id="pinch-zoom-1" class="background-image-container">
     <svg
       id="interaction-layer"
       data-name="Obrysy z SVG 1"
