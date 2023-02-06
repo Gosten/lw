@@ -34,7 +34,6 @@ module.exports = {
 
   methods: {
     handleClick: function () {
-      console.log("clicked");
       uibuilder.send("abc");
     }
   }

@@ -7,6 +7,8 @@
       :active-problem="activeProblem"
       :problem-state="problemState"
       :edited-problem="editedProblem"
+      :alt-pinch-id="altPinchId"
+      :loop-state="loopState"
     >
     </interactive-layer>
   </div>
@@ -40,12 +42,16 @@ module.exports = {
       }
     },
     handleClick(id) {
-      if (this.isScene(ADD_PROBLEM))
-        this.$store.commit("toggleProblemState", id);
-      if (this.isScene(EDIT_PROBLEM))
-        this.$store.commit("editProblemStateGrip", id);
-      if (this.isScene(ADD_PROBLEM) || this.isScene(EDIT_PROBLEM))
-        this.sendGripMessage(id);
+      if (this.isLoopBoard) {
+        this.gripClickCallback && this.gripClickCallback(id);
+      } else {
+        if (this.isScene(ADD_PROBLEM))
+          this.$store.commit("toggleProblemState", id);
+        if (this.isScene(EDIT_PROBLEM))
+          this.$store.commit("editProblemStateGrip", id);
+        if (this.isScene(ADD_PROBLEM) || this.isScene(EDIT_PROBLEM))
+          this.sendGripMessage(id);
+      }
     },
     sendGripMessage(id) {
       let diodes = gripMap[id];
@@ -79,6 +85,9 @@ module.exports = {
     }
   },
   computed: {
+    isLoopBoard() {
+      return this.altPinchId === "loop-pinch";
+    },
     problemState() {
       return this.$store.getters.getAddProblemState;
     },
@@ -109,7 +118,10 @@ module.exports = {
     };
   },
   props: {
-    boardId: String
+    boardId: String,
+    altPinchId: String,
+    gripClickCallback: Function,
+    loopState: Object
   },
   mounted() {},
   created() {},

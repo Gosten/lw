@@ -1,12 +1,10 @@
 .app-container {
-  height: 100%;
+	height: 100%;
 }
 
-body {
-  background: white;
-  touch-action: pan-x pan-y;
+:root {
+	touch-action: pan-x pan-y;
 }
-
-* {
-  touch-action: pan-x pan-y;
+body{
+	background: white;
 }
