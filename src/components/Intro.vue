@@ -2,8 +2,18 @@
   <div id="intro-scene">
     <div class="intro-container">
       <transition name="intro">
+<<<<<<< HEAD
         <img v-if="fade" class="splash-img" src="./images/LW_logo.svg" alt="" />
         <!-- <img v-if="fade" class="splash-img" src="./images/LW_logo_gif.gif" alt="" />-->
+=======
+        <!-- <img v-if="fade" class="splash-img" src="./images/LW_logo_gif.gif" alt="" /> -->
+        <img
+          v-if="fade"
+          class="splash-img"
+          src="./images/LW_logo_gif.gif"
+          alt=""
+        />
+>>>>>>> parent of c39914d (United update test)
       </transition>
     </div>
   </div>
