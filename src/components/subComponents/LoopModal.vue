@@ -18,6 +18,7 @@ module.exports = {
         this.loopState.order.push(id);
       }
     },
+<<<<<<< HEAD
     undo() {
       if (Boolean(this.loopState.order.length)) {
         const removed = this.loopState.order.pop();
@@ -32,16 +33,21 @@ module.exports = {
         this.loopState.selectedGrip = "";
       }
     },
+=======
+>>>>>>> parent of 624f79c (Pinch zoom test update)
     handleSubmit() {
       this.setLoopState(this.loopState.order);
       this.close();
     }
   },
+<<<<<<< HEAD
   computed: {
     problemState() {
       return this.$store.getters.getAddProblemState;
     }
   },
+=======
+>>>>>>> parent of 624f79c (Pinch zoom test update)
   props: {
     setLoopState: Function,
     close: Function,
@@ -50,6 +56,7 @@ module.exports = {
   mounted() {
     const initialOrder = this.initialOrder || [];
     this.loopState.order = initialOrder;
+<<<<<<< HEAD
 
     const problemKeys = Object.keys(this.problemState);
 
@@ -67,6 +74,8 @@ module.exports = {
       console.log({ startTopKeys: this.startTopKeys });
       setTimeout(() => this.handleGripClick(this.startTopKeys[0]), 300);
     }
+=======
+>>>>>>> parent of 624f79c (Pinch zoom test update)
   },
   components: {
     board: httpVueLoader("components/Board/Board.vue"),
@@ -98,8 +107,12 @@ module.exports = {
 .loop-modal {
   display: grid;
   grid-template-columns: 100%;
+<<<<<<< HEAD
   grid-template-rows: 4em auto 10em 6em;
   max-width: calc(100vw - 3em);
+=======
+  grid-template-rows: auto 60% 4em auto;
+>>>>>>> parent of 624f79c (Pinch zoom test update)
 }
 </style>
 
@@ -118,8 +131,11 @@ module.exports = {
       <loop-number-display
         :loop-state="loopState"
         :set-selected-grip="handleGripClick"
+<<<<<<< HEAD
         :undo="undo"
         :clear-order="clearOrder"
+=======
+>>>>>>> parent of 624f79c (Pinch zoom test update)
       ></loop-number-display>
       <button class="button" @click="handleSubmit">Zatwierdź</button>
       <button class="close-button" @click="close">

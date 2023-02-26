@@ -3,6 +3,7 @@
     <div class="intro-container">
       <transition name="intro">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <img v-if="fade" class="splash-img" src="./images/LW_logo.svg" alt="" />
         <!-- <img v-if="fade" class="splash-img" src="./images/LW_logo_gif.gif" alt="" />-->
 =======
@@ -14,6 +15,10 @@
           alt=""
         />
 >>>>>>> parent of c39914d (United update test)
+=======
+        <img v-if="fade" class="splash-img" src="./images/LW_logo.svg" alt="" />
+        <!-- <img v-if="fade" class="splash-img" src="./images/LW_logo_gif.gif" alt="" />-->
+>>>>>>> parent of 624f79c (Pinch zoom test update)
       </transition>
     </div>
   </div>

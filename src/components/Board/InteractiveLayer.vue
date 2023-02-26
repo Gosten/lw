@@ -39,6 +39,7 @@ module.exports = {
             const isOrdered = this.loopState.order.includes(id);
             const isSelected = this.loopState.selectedGrip === id;
             let classList = "stroke grip-selection-loop-unordered";
+<<<<<<< HEAD
 
             // If during startTopNumberingStage and id doesn't belong to start/top grip
             if (startTopNumberingStage && !this.isStartTopId(id)) {
@@ -81,10 +82,15 @@ module.exports = {
             if (isSelected) {
               classList = `stroke grip-selection-loop-selected`;
             }
+=======
+            if (isOrdered) classList = `stroke grip-selection-loop-ordered`;
+            if (isSelected) classList = `stroke grip-selection-loop-selected`;
+>>>>>>> parent of 624f79c (Pinch zoom test update)
             handle.classList = classList;
           } else {
             handle.classList = `stroke grip-selection-${isSelected}`;
           }
+<<<<<<< HEAD
         } else {
           if (this.isLoopBoard) {
             handle.classList = "stroke grip-selection-loop-excluded";
@@ -92,6 +98,9 @@ module.exports = {
             handle.classList = "";
           }
         }
+=======
+        } else handle.classList = "";
+>>>>>>> parent of 624f79c (Pinch zoom test update)
       }
     },
     getDisplayProblem() {
@@ -168,6 +177,7 @@ module.exports = {
     };
   },
   mounted() {
+<<<<<<< HEAD
     const problem = this.getDisplayProblem();
     this.startTopKeys = Object.keys(problem).filter(
       (key) => problem[key] === 2
@@ -180,6 +190,10 @@ module.exports = {
     setTimeout(() => {
       this.updateSelectors(this.startTopNumberingStage);
     }, 500);
+=======
+    this.updateSelectors();
+    setTimeout(() => this.updateSelectors(), 500);
+>>>>>>> parent of 624f79c (Pinch zoom test update)
     let el = document.getElementById(this.altPinchId || "pinch-zoom-1");
     this.zoomElement = new PinchZoom(el, {
       draggableUnzoomed: false
@@ -202,11 +216,15 @@ module.exports = {
   watch: {
     loopState: {
       handler: function (newVal, oldVal) {
+<<<<<<< HEAD
         const newLoopOrder = newVal.order;
         const startTopNumberingStage =
           this.updateStartTopNumberingStage(newLoopOrder);
         this.updateSelectors(startTopNumberingStage);
         this.loopOrder = newLoopOrder;
+=======
+        this.updateSelectors();
+>>>>>>> parent of 624f79c (Pinch zoom test update)
       },
       deep: true
     }

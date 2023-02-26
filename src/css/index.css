@@ -8,10 +8,13 @@
 @font-face {
   font-family: "Russo One";
   src: url("./fonts/Russo_One/RussoOne-Regular.ttf");
+<<<<<<< HEAD
 }
 @font-face {
   font-family: "JetBrains";
   src: url("./fonts/JetBrains_Mono/JetBrainsMono-Light.ttf");
+=======
+>>>>>>> parent of 624f79c (Pinch zoom test update)
 }
 * {
   box-sizing: border-box;

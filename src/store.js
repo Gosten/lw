@@ -53,13 +53,14 @@ const store = new Vuex.Store({
       loopLength: undefined,
       newProblem: {}
     },
+    // problemList: [],
     problemList,
     filterSlider: {
       value1: 0,
       value2: GRADES.length - 1
     },
-    // intro: INTRO,
-    intro: true,
+    intro: INTRO,
+    // intro: false,
     textInputFocus: false,
     zoomMap: {
       [ADD_PROBLEM]: {

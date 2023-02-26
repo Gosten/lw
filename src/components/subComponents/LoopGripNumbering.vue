@@ -2,8 +2,13 @@
 module.exports = {
   data() {
     return {
+<<<<<<< HEAD
       loopNumberItemInView: null,
       startTopKeys: []
+=======
+      mainContainerHandle: null,
+      loopNumberItemInView: null
+>>>>>>> parent of 624f79c (Pinch zoom test update)
     };
   },
   methods: {
@@ -17,6 +22,7 @@ module.exports = {
       }
     }
   },
+<<<<<<< HEAD
   computed: {
     isLoopOrderEmpty() {
       return Boolean(
@@ -29,6 +35,12 @@ module.exports = {
     setSelectedGrip: Function,
     undo: Function,
     clearOrder: Function
+=======
+  computed: {},
+  props: {
+    loopState: Object,
+    setSelectedGrip: Function
+>>>>>>> parent of 624f79c (Pinch zoom test update)
   },
   watch: {
     "loopState.selectedGrip": {
@@ -42,18 +54,29 @@ module.exports = {
     this.scrollToSelected(this.loopState.selectedGrip);
   },
   components: {},
+<<<<<<< HEAD
   mounted() {},
   components: {
     "control-button": httpVueLoader(
       "components/subComponents/ControlButton.vue"
     )
+=======
+  mounted() {
+    this.mainContainerHandle = document.getElementById(
+      "loop-numbering-display"
+    );
+>>>>>>> parent of 624f79c (Pinch zoom test update)
   }
 };
 </script>
 
 <style scoped type="text/css">
+<<<<<<< HEAD
 .loop-grip-numbers-container {
   flex-grow: 0;
+=======
+.loop-grip-numbering-container {
+>>>>>>> parent of 624f79c (Pinch zoom test update)
   width: 100%;
   padding-bottom: 10px;
   position: relative;
@@ -85,6 +108,7 @@ module.exports = {
   border: 2px solid rgb(0, 47, 255);
   /* font-size: 3em; */
 }
+<<<<<<< HEAD
 
 .loop-numbering-controls {
   align-self: center;
@@ -127,5 +151,23 @@ module.exports = {
         icon-class-name="mdi-trash-can-outline"
       ></control-button>
     </div>
+=======
+</style>
+
+<template>
+  <div class="loop-grip-numbering-container" id="loop-numbering-display">
+    <div class="loop-numbers-wrapper-container">
+      <div
+        class="loop-number-item"
+        v-for="(id, index) in loopState.order"
+        :key="`${id}-${index}`"
+        :class="{ 'selected-number': id === loopState.selectedGrip }"
+        :id="`loop-number-item-${id}`"
+        @click="() => setSelectedGrip(id)"
+      >
+        {{ index }}
+      </div>
+    </div>
+>>>>>>> parent of 624f79c (Pinch zoom test update)
   </div>
 </template>
