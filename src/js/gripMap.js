@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 const gripMap = {
 _0_106 : [ ],
-=======
-"const gripMap = {
-_0_106 : [ ],"
 _0_11 : [ ],
->>>>>>> parent of c39914d (United update test)
 _0_117 : [ ],
 _0_124 : [ ],
 _0_135 : [ ],
