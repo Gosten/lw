@@ -72,18 +72,13 @@ module.exports = {
       return this.$store.getters.getZoomScale(ADD_PROBLEM);
     },
     isAnyGripSelected() {
-<<<<<<< HEAD
       const problemStateValues = Object.values(this.problemState) || [];
-=======
-      const problemStateValues = Object.values(this.problmState) || [];
->>>>>>> parent of 624f79c (Pinch zoom test update)
       return Boolean(
         problemStateValues.length &&
           problemStateValues.reduce((acc, curr) => acc || curr)
       );
     },
     gripNumberingButtonIcon() {
-<<<<<<< HEAD
       const selectedGrips = Object.keys(this.problemState).filter(
         (key) => this.problemState[key]
       );
@@ -93,11 +88,6 @@ module.exports = {
         this.loopOrder = null;
         return "mdi-alert-circle-outline color-warning";
       }
-=======
-      const selecterGripsAmount = Object.values(this.problmState).filter(
-        Boolean
-      ).length;
->>>>>>> parent of 624f79c (Pinch zoom test update)
       if (!this.isLoopType || selecterGripsAmount === 0) return "";
       return !this.loopOrder || selecterGripsAmount > this.loopOrder.length
         ? "mdi-alert-circle-outline color-warning"
@@ -205,7 +195,6 @@ module.exports = {
 
     setLoopState(newOrder) {
       this.loopOrder = newOrder;
-<<<<<<< HEAD
     },
 
     shouldClearOrder(order, selected) {
@@ -221,8 +210,6 @@ module.exports = {
       // );
 
       return false;
-=======
->>>>>>> parent of 624f79c (Pinch zoom test update)
     }
   },
   props: {
