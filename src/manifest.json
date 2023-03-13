@@ -8,6 +8,6 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/board/",
+  "start_url": "/",
   "display": "fullscreen"
 }
