@@ -15,5 +15,7 @@
     }
   ],
   "start_url": "/lw/src/",
+  "theme_color": "#000000",
+  "background_color": "#000000",
   "display": "fullscreen"
 }
